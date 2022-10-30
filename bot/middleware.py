@@ -20,14 +20,11 @@ class AntiFloodMiddleware(BaseMiddleware):
         
         if not user_id in my_storage:
             my_storage[user_id] = [time, False]
-            # print(1)
         elif my_storage[user_id][1]:
-            # print(2)
             return
         elif my_storage[user_id][0] + .5 > time: # new message sent less than in 0.5 sec
             my_storage[user_id] = [time, True]
             await event.answer("You Sooooo Fast!!! Now You Should Make Captcha Below To Continue", reply_markup=captcha_inline())
-            # print(3)
             return
         else:
             my_storage[user_id][0] = time

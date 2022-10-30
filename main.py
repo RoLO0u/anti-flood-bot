@@ -2,7 +2,7 @@ import asyncio
 import logging
 import os
 
-from aiogram import Dispatcher, types, Bot, F
+from aiogram import Dispatcher, Bot, F
 from aiogram.fsm.storage.memory import MemoryStorage
 
 from bot import middleware
@@ -32,10 +32,10 @@ async def run():
     # Middleware here
     dp.message.middleware(middleware.AntiFloodMiddleware())
 
-    # try:
-    await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
-    # finally:
-    #     await bot.session.close()
+    try:
+        await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
+    finally:
+        await bot.session.close()
 
 if __name__ == "__main__":
     asyncio.run(run())

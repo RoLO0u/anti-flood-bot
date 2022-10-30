@@ -1,10 +1,9 @@
-from typing import Dict, Any
+from typing import Any
 from time import monotonic
 
 from aiogram import Router, F
 
 from aiogram.types import CallbackQuery
-from aiogram.filters.callback_data import CallbackData
 from aiogram.fsm.storage.memory import MemoryStorage
 
 router = Router()
