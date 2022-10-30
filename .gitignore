@@ -1,0 +1,3 @@
+bot/__pycache__/*
+bot/handlers/__pycache__*
+venv/*
