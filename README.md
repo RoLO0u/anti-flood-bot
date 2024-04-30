@@ -2,6 +2,12 @@
 
 Simple telegram bot example written on aiogram with captcha to stop spam.
 
+## Environment
+
+To use this example set `.env` file with:
+
+`BOT_TOKEN` set to token given to the bot by @BotFather
+
 ## Captcha look
 
 <img src="readmefiles/example.png" alt="example" width=400>
