@@ -10,5 +10,6 @@ idna==3.4
 magic-filter==1.0.9
 multidict==6.0.2
 pydantic==1.10.2
+python-dotenv==1.0.1
 typing_extensions==4.4.0
 yarl==1.8.1

@@ -9,6 +9,9 @@ from bot import middleware
 
 from bot.handlers import commands, text, inline
 
+from bot.run import Environment
+Environment().load_env()
+
 async def run():
 
     logging.basicConfig(level=logging.WARNING)
