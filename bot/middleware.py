@@ -1,4 +1,4 @@
-from time import monotonic
+from time import time as timeSeconds
 from typing import Any, Awaitable, Callable, Dict
 
 from aiogram.types import Message
@@ -16,7 +16,7 @@ class AntiFloodMiddleware(BaseMiddleware):
         my_storage = data.get("dp").storage.storage
 
         user_id = str(event.from_user.id)
-        time = monotonic()
+        time = timeSeconds()
         
         if not user_id in my_storage:
             my_storage[user_id] = [time, False]
@@ -24,7 +24,7 @@ class AntiFloodMiddleware(BaseMiddleware):
             return
         elif my_storage[user_id][0] + .5 > time: # new message sent less than in 0.5 sec
             my_storage[user_id] = [time, True]
-            await event.answer("You Sooooo Fast!!! Now You Should Make Captcha Below To Continue", reply_markup=captcha_inline())
+            await event.answer("You Are Sooooo Fast!!! Now You Should Make Captcha Below To Continue", reply_markup=captcha_inline())
             return
         else:
             my_storage[user_id][0] = time
