@@ -20,14 +20,14 @@ def create_blank() -> MatLike:
 def to_bytes(image: MatLike) -> bytes:
     return cv2.imencode(".jpg", image)[1].tobytes()
 
-def create_captcha() -> tuple[bytes, str, int]:
+def create_captcha() -> tuple[bytes, int]:
 
     captcha = create_blank()
     
     target_path = const.IMAGES_ROUTE + random.choice(const.IMAGES)
     target = cv2.imread(target_path, -1)
 
-    correct_answer, angle = random.choice(const.OPTIONS)
+    _, angle = random.choice(const.OPTIONS)
 
     rotate_offset = random.randint(-const.ROTATE_OFFSET, const.ROTATE_OFFSET)
     target = rotate_image(target, angle + rotate_offset)
@@ -45,4 +45,4 @@ def create_captcha() -> tuple[bytes, str, int]:
         captcha[y1:y2, x1:x2, c] = (alpha_s * target[:, :, c] +
            alpha_l * captcha[y1:y2, x1:x2, c])
     
-    return to_bytes(captcha), correct_answer, angle
+    return to_bytes(captcha), angle
