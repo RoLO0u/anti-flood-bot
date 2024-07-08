@@ -4,7 +4,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from bot import const
 
-def captcha_inline(answer: str) -> InlineKeyboardMarkup:
+def captcha_inline() -> InlineKeyboardMarkup:
     random_capts = [(caption[0], caption[1]) for caption in list(const.OPTIONS)]
     random.shuffle(random_capts)
     listed_markup = [InlineKeyboardButton(text=capt[0], callback_data=f"spam{capt[1]}") for capt in random_capts]

@@ -31,7 +31,7 @@ class AntiFloodMiddleware(BaseMiddleware):
             image, answer, angle = create_captcha()
             user_storage["data"] = [time, True, angle]
             await my_storage.set_data(user_id, user_storage)
-            await event.answer_photo(BufferedInputFile(image, "captcha"), "<PLACEHOLDER>", reply_markup=captcha_inline(answer))
+            await event.answer_photo(BufferedInputFile(image, "captcha"), "<PLACEHOLDER>", reply_markup=captcha_inline())
             return        
         else:
             user_storage["data"][0] = time
