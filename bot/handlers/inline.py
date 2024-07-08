@@ -8,12 +8,16 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 router = Router()
 
-@router.callback_query(F.data == "1")
+@router.callback_query(F.data.startswith("spam"))
 async def callback_query_handler(callback_query: CallbackQuery, storage: MemoryStorage) -> Any:
 
     user_id = str(callback_query.from_user.id)
-    time = monotonic()
 
-    await callback_query.message.answer("YAY!!!! You Are Sooooooooo Good")
-    storage.storage[user_id] = [time, False]
-    await callback_query.message.delete()
+    user_storage = await storage.get_data(user_id)
+
+    if int(callback_query.data[4:]) == user_storage["data"][2]:
+        time = monotonic()
+        await callback_query.message.answer("<PLACEHOLDER>")
+        user_storage["data"] = [time, False, 0]
+        await storage.set_data(user_id, user_storage)
+        await callback_query.message.delete()
