@@ -14,7 +14,7 @@ Environment().load_env()
 
 async def run():
 
-    logging.basicConfig(level=logging.WARNING)
+    logging.basicConfig(level=logging.INFO)
 
     bot = Bot(os.getenv("BOT_TOKEN"))
 
