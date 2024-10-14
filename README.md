@@ -22,5 +22,5 @@ Currently this captcha is being used by [@paces_bot](https://t.me/paces_bot)
 
 ## Using
 
-* aiogram 3.10.0
+* aiogram 3.13.1
 * python 3.11.8 (recommended)
