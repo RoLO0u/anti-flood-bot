@@ -16,7 +16,10 @@ async def run():
 
     logging.basicConfig(level=logging.INFO)
 
-    bot = Bot(os.getenv("BOT_TOKEN"))
+    BOT_TOKEN = os.getenv("BOT_TOKEN")
+    assert BOT_TOKEN
+
+    bot = Bot(BOT_TOKEN)
 
     storage = MemoryStorage()
 
@@ -24,15 +27,15 @@ async def run():
 
     dp["dp"] = dp
     dp["storage"] = storage
+    dp["bot"] = bot
+    dp["bot_id"] = bot.id
 
     dp.message.filter(F.chat.type == "private")
 
-    # Some routers here
     dp.include_router(commands.router)
     dp.include_router(text.router)
     dp.include_router(inline.router)
 
-    # Middleware here
     dp.message.middleware(middleware.AntiFloodMiddleware())
 
     try:

@@ -1,4 +1,3 @@
-from typing import SupportsFloat
 from cv2.typing import MatLike
 
 import cv2, random
@@ -6,7 +5,7 @@ import numpy as np
 
 from bot import const
 
-def rotate_image(image: MatLike, angle: SupportsFloat) -> MatLike:
+def rotate_image(image: MatLike, angle: float) -> MatLike:
     image_center = tuple(np.array(image.shape[1::-1]) / 2)
     rot_mat = cv2.getRotationMatrix2D(image_center, -angle, 1.0)
     result = cv2.warpAffine(image, rot_mat, image.shape[1::-1], flags=cv2.INTER_LINEAR)
@@ -14,7 +13,7 @@ def rotate_image(image: MatLike, angle: SupportsFloat) -> MatLike:
 
 def create_blank() -> MatLike:
     blank = np.zeros((const.HEIGHT, const.WIDTH, 3), np.uint8)
-    blank[:, :, :] = const.WHITE
+    blank[:, :, :] = const.BACKGROUND
     return blank
 
 def to_bytes(image: MatLike) -> bytes:
@@ -27,7 +26,10 @@ def create_captcha() -> tuple[bytes, int]:
     target_path = const.IMAGES_ROUTE + random.choice(const.IMAGES)
     target = cv2.imread(target_path, -1)
 
-    _, angle = random.choice(const.OPTIONS)
+    while True:
+        _, angle = random.choice(const.OPTIONS)
+        if angle is not None:
+            break
 
     rotate_offset = random.randint(-const.ROTATE_OFFSET, const.ROTATE_OFFSET)
     target = rotate_image(target, angle + rotate_offset)
