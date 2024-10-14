@@ -7,6 +7,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 from bot.markups import captcha_inline
 from bot.images import create_captcha
+from bot.const import DELAY
 
 class AntiFloodMiddleware(BaseMiddleware):
 
@@ -22,12 +23,12 @@ class AntiFloodMiddleware(BaseMiddleware):
         user_storage: Dict[str, List[float | bool]] = await my_storage.get_data(user_id)
 
         time = timeSeconds()
-        
+
         if not user_storage or not user_storage.get("data"):
             user_storage["data"] = [time, False, 0]
         elif user_storage["data"][1]:
             return
-        elif user_storage["data"][0] + .5 > time: # new message sent less than in 0.5 sec
+        elif user_storage["data"][0] + DELAY > time: # new message sent less than in DELAY sec
             image, angle = create_captcha()
             user_storage["data"] = [time, True, angle]
             await my_storage.set_data(user_id, user_storage)
