@@ -8,13 +8,13 @@ IMAGES_ROUTE = "bot/img/"
 
 WIDTH, HEIGHT= 800, 400
 
-BACKGROUND = 0xFF # white by default
+BACKGROUND = 0xFF
 
 X_OFFSET, Y_OFFSET = 100, 100
 
-ROTATE_OFFSET = 5 # random degrees
+ROTATE_OFFSET = 5
 
-DELAY = .5 # time after which the captcha is triggered
+DELAY = .5
 
 OPTIONS = (
     ("↖", 225), ("⬆️️", 270), ("↗️", 315),
