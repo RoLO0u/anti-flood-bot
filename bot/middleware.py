@@ -26,7 +26,6 @@ class AntiFloodMiddleware(BaseMiddleware):
             chat_id=event.chat.id,
             user_id=event.from_user.id
         )
-        print(key)
         user_storage: Dict[str, List[float | bool]] = await my_storage.get_data(key)
 
         time = timeSeconds()

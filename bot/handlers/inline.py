@@ -21,13 +21,10 @@ async def callback_query_handler(callback_query: CallbackQuery, storage: MemoryS
         user_id=callback_query.from_user.id
     )
     user_storage = await storage.get_data(key)
-    print(user_storage, key)
 
     assert callback_query and callback_query.data
     if int(callback_query.data[4:]) == user_storage["data"][2]:
         time = monotonic()
-
-
         await message.answer("<PLACEHOLDER>")
         user_storage["data"] = [time, False, 0]
         await storage.set_data(key, user_storage)
