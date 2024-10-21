@@ -1,5 +1,3 @@
-import random
-
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from bot import const
